@@ -1,6 +1,5 @@
 import React, {useState, useReducer} from 'react'
 import { Button, Modal, Form, Input, TextArea, Message } from 'semantic-ui-react';
-import ListaEmpresas from './ListaEmpresas';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -28,7 +27,6 @@ function ModalAgregar() {
   const [errorFecha, setErrorFecha] = useState(false);
   const [errorTipo, setErrorTipo] = useState(false);
   const [errores, setErrores] = useState([]);
-  const [cargando, setCargando] = useState(false);
   
 
   const [state, dispatch] = useReducer(reducer, {

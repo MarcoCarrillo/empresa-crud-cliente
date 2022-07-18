@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Grid, Header, Icon, Card, Segment, Button  } from 'semantic-ui-react';
+import React from 'react';
+import { Grid, Header, Icon, Card, Segment } from 'semantic-ui-react';
 import ListaEmpresas from './components/ListaEmpresas';
 import ModalAgregar from './components/ModalAgregar';
 

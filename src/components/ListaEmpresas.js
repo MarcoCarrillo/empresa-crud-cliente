@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Table, Message, Grid, Button, Icon, Loader } from 'semantic-ui-react';
+import { Table, Message, Loader } from 'semantic-ui-react';
 import Empresa from './Empresa';
 
 function ListaEmpresas(){
@@ -51,7 +51,7 @@ function ListaEmpresas(){
                 })}
             </Table.Body>
         </Table> 
-        
+
         }
     </div>
     

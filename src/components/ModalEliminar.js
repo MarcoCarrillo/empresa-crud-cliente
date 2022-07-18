@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Message, Input, Button, Modal, Icon } from 'semantic-ui-react'
+import { Message, Button, Modal, Icon } from 'semantic-ui-react'
 
 function reducer(state, action) {
   switch (action.type) {
@@ -61,7 +61,7 @@ function ModalEliminar({registro}) {
         <Modal.Header>Eliminar Empresa</Modal.Header>
         
         <Modal.Content>
-        {exito ? <Message color='green'>La empresa se eliminó correctamente</Message> : <p>¿Estás seguro que deseas eliminar esta empresa </p>}
+        {exito ? <Message color='green'>La empresa se eliminó correctamente</Message> : <p>¿Estás seguro que deseas eliminar esta empresa? </p>}
           
         </Modal.Content>
         <Modal.Actions>
