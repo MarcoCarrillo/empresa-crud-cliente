@@ -1,43 +1,61 @@
-import React, {useState} from 'react';
-import { Table, Message, Grid, Button, Icon } from 'semantic-ui-react';
+import React, {useEffect, useState} from 'react';
+import { Table, Message, Grid, Button, Icon, Loader } from 'semantic-ui-react';
 import Empresa from './Empresa';
 
 function ListaEmpresas(){
 
-    const data = [
-        {id: '1', nombre: 'Amazon', fecha_constitucion: '02/07/1990', tipo_empresa: 'Distribuidor', comentarios: 'Muy buena empresa'},
-        {id: '2', nombre: 'Mercado Libre', fecha_constitucion: '02/07/1990', tipo_empresa: 'Mayorista', comentarios: 'Muy buena empresa'},
-        {id: '3', nombre: 'Walmart', fecha_constitucion: '02/07/1990', tipo_empresa: 'Usuario Final', comentarios: 'Muy buena empresa'}
-    ];
+    const [empresas, setEmpresas] = useState([{}]);
+    const [cargando, setCargando] = useState(false);
 
-    console.log(data);
-    if(data.length === 0 || data === undefined){
+    const obtenerEmpresas = async () => {
+        try {
+            setCargando(true);
+            const url = 'http://localhost:3001/obtenerEmpresas';
+            const respuesta = await fetch(url);
+            const resultado = await respuesta.json();
+            setEmpresas(resultado);
+            setCargando(false);
+            console.log(resultado);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        obtenerEmpresas();
+    }, [])
+
+    if(empresas.length === 0 || empresas === undefined){
         return (<Message warning>Sin Empresas...</Message>);
     }
 
     return(
-    <Table celled selectable>
-        <Table.Header>
-            <Table.Row>
-                <Table.HeaderCell textAlign='center'>Nombre</Table.HeaderCell>
-                <Table.HeaderCell textAlign='center'>Tipo de empresa</Table.HeaderCell>
-                <Table.HeaderCell textAlign='center'>Fecha de constitución</Table.HeaderCell>
-                <Table.HeaderCell textAlign='center'>Acciones</Table.HeaderCell>
-            </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
-            {data.map(registro => {
-                return (
-                    <Empresa 
-                        key={registro.id}
-                        registro={registro}
-                    />
-                );
-            })}
-      
-        </Table.Body>
-  </Table>
+    <div>
+        {cargando ? <Loader active inline='centered' /> : 
+        <Table celled selectable>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell textAlign='center'>Nombre</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center'>Tipo de empresa</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center'>Fecha de constitución</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center'>Acciones</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+                {empresas.map(registro => {
+                    return (
+                        <Empresa 
+                            key={registro.id}
+                            registro={registro}
+                        />
+                    );
+                })}
+            </Table.Body>
+        </Table> 
+        
+        }
+    </div>
+    
+  
     );
 }
 

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Grid, Header, Icon, Card, Segment, Button  } from 'semantic-ui-react';
-import ListaEmpresas from './components/ListaEmpresas'
+import ListaEmpresas from './components/ListaEmpresas';
+import ModalAgregar from './components/ModalAgregar';
 
 function App() {
+
   return (
     <Grid container style={{ padding: '3em 0em' }}> 
       <Grid.Row>
@@ -17,7 +19,7 @@ function App() {
         <Grid.Column>
           <Segment style={{marginBottom: '30px'}} align='center'>
             <Card  fluid color='blue' header='Nueva empresa' />
-            <Button primary align='center' size='large'>Agregar empresa</Button>
+            <ModalAgregar/>
           </Segment>
           <Segment  align='center'>
             <Card fluid color='green' header='Lista de empresas' />
